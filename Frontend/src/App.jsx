@@ -2,7 +2,7 @@ import React from "react";
 import "./index.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
-import Login from "./components/Login";
+import Login from "./components/login";
 import Signup from "./components/Signup";
 import { Toaster } from "react-hot-toast";
 import Purchases from "./components/Purchases";
