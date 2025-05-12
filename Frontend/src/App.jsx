@@ -9,11 +9,11 @@ import Purchases from "./components/Purchases";
 import Buy from "./components/Buy";
 import Courses from "./components/Courses";
 import AdminSignup from "./Admin/AdminSignup";
-import AdminLogin from "./admin/AdminLogin";
+import AdminLogin from "./Admin/AdminLogin";
 import Dashboard from "./Admin/Dashboard";
-import CourseCreate from "./admin/CourseCreate";
-import UpdateCourse from "./admin/UpdateCourse";
-import OurCourses from "./admin/OurCourses";
+import CourseCreate from "./Admin/CourseCreate";
+import UpdateCourse from "./Admin/UpdateCourse";
+import OurCourses from "./Admin/OurCourses";
 
 function App() {
   const user = JSON.parse(localStorage.getItem("user"));
