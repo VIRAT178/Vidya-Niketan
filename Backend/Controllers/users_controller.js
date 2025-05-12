@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import { z } from "zod";
 import jwt from "jsonwebtoken";
 import config from "../config.js";
-import { Purchase } from "../Models/Purchase_model.js";
+import { Purchase } from "../Models/purchase_model.js";
 import { Course } from "../Models/course_model.js";
 
 export const signup = async (req, res) => {
