@@ -1,1 +1,1 @@
-export const BACKEND_URL = "https://vidya-niketan.onrender.com/api/v1"
+export const BACKEND_URL = "vidya-niketan-cnpb-vishal-pratap-singhs-projects.vercel.app/api/v1"
