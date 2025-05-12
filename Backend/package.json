@@ -1,0 +1,33 @@
+{
+  "name": "course-app",
+  "version": "1.0.0",
+  "description": "full stack course-selling-web",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "course",
+    "app"
+  ],
+  "author": "vishal singh",
+  "license": "ISC",
+  "dependencies": {
+    "@stripe/react-stripe-js": "^3.7.0",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.6.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
+    "express-fileupload": "^1.5.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.14.1",
+    "nodemon": "^3.1.10",
+    "stripe": "^18.1.0",
+    "zod": "^3.24.4"
+  }
+}
