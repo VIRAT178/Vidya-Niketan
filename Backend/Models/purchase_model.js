@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-const pruchaseSchema = new mongoose.Schema({
+const purchaseSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Types.ObjectId,
     ref: "User",
@@ -11,4 +11,4 @@ const pruchaseSchema = new mongoose.Schema({
   },
 });
 
-export const Purchase = mongoose.model("Purchase", pruchaseSchema);
+export const Purchase = mongoose.models.Purchase || mongoose.model("Purchase", purchaseSchema);
