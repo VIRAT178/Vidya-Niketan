@@ -1,5 +1,5 @@
 import { Order } from "../Models/order_model.js";
-import { Purchase } from "../Models/Purchase_model.js";
+import { Purchase } from "../Models/purchase_model.js";
 
 export const orderData = async (req, res) => {
   const order = req.body;
