@@ -11,4 +11,4 @@ const purchaseSchema = new mongoose.Schema({
   },
 });
 
-export const Purchase = mongoose.models.Purchase || mongoose.model("Purchase", purchaseSchema);
+export const Purchase = mongoose.model("Purchase", purchaseSchema);
