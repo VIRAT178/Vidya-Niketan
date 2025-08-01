@@ -1,2 +1,2 @@
-const BACKEND_URL = "http://localhost:5000/api/v1/";
+const BACKEND_URL = "https://vidya-niketan-vl76.onrender.com";
 export default BACKEND_URL;
