@@ -49,7 +49,7 @@ function Home() {
 
   const handleLogout = async()=>{
     try {
-     const response = await axios.get(`${BACKEND_URL}users/logout`,{
+     const response = await axios.post(`${BACKEND_URL}users/logout`,{
         withCredentials:true
       })
       toast.success("Logout Successfully",(response).data.message)
