@@ -51,10 +51,10 @@ try {
 }
 
 //definig routes
-app.use('/api/v1/course', courseRoute)
-app.use('/api/v1/users', usersRoute)
-app.use('/api/v1/admin',adminRoute)
-app.use("/api/v1/order", orderRoute);
+app.use('/course', courseRoute)
+app.use('/users', usersRoute)
+app.use('/admin',adminRoute)
+app.use("/order", orderRoute);
 
 
 //cloudnry confrigution
