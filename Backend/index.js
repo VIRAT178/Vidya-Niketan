@@ -26,10 +26,9 @@ const allowedOrigins = [
   "https://vidya-niketan.vercel.app",
   "http://localhost:5173"
 ];
-
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || origin.includes("vercel.app") || origin.includes("localhost")) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
@@ -37,6 +36,7 @@ app.use(cors({
   },
   credentials: true
 }));
+
 
 
 
