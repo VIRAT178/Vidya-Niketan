@@ -22,12 +22,22 @@ app.use(fileUpload({
   useTempFiles: true,
   tempFileDir: "/tmp/"
 }));
+const allowedOrigins = [
+  "https://vidya-niketan.vercel.app",
+  "http://localhost:5173"
+];
+
 app.use(cors({
-   origin: process.env.FRONTEND_URL,
-   credentials: true,
-   methods : ["GET","POST","PUT","DELETE"],
-   allowedHeaders :["Content-Type","Authorization"],
-}))
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+
 
 
 const port = process.env.PORT || 3000;
