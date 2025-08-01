@@ -18,10 +18,10 @@ const courseSchema = new mongoose.Schema({
       type:String
      }
   },
-  createrId:{
+  creatorId:{
     type : mongoose.Types.ObjectId,
     ref : "user",
   }
 });
 
-export const Course = mongoose.model("Course", courseSchema);
+export const Course = mongoose.model("Course", courseSchema, "courses");

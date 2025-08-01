@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import { BACKEND_URL } from "../utilts/utilts";
+import  BACKEND_URL  from "../utilts/utilts";
 
 function UpdateCourse() {
   const { id } = useParams();
@@ -18,7 +18,7 @@ function UpdateCourse() {
   useEffect(() => {
     const fetchCourseData = async () => {
       try {
-        const { data } = await axios.get(`${BACKEND_URL}/course/update/${id}`, {
+        const { data } = await axios.get(`${BACKEND_URL}course/course/${id}`, {
           withCredentials: true,
         });
         console.log(data);
@@ -53,7 +53,7 @@ function UpdateCourse() {
     formData.append("description", description);
     formData.append("price", price);
     if (image) {
-      formData.append("imageUrl", image);
+      formData.append("image", image);
     }
     const admin = JSON.parse(localStorage.getItem("admin"));
     const token = admin.token;
@@ -63,20 +63,21 @@ function UpdateCourse() {
     }
     try {
       const response = await axios.put(
-        `${BACKEND_URL}/course/update/${id}`,
+        `${BACKEND_URL}course/update/${id}`,
         formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data"
           },
           withCredentials: true,
         }
       );
-      toast.success(response.data.message || "Course updated successfully22");
+      toast.success(response.data.message || "Course updated successfully");
       navigate("/admin/our-courses"); 
     } catch (error) {
       console.error(error);
-      toast.error(error.response.data.errors);
+      toast.error(error.message);
     }
   };
 

@@ -1,17 +1,18 @@
 import express from 'express';
-import { buyCourse, createCourse, deleteCourse, getallCourse, getCourse,updateCourse } from '../Controllers/course_controller.js';
+import { buyCourse, createCourse, deleteCourse, getOneCourse, getCourses,updateCourse } from '../Controllers/course_controller.js';
 import userMiddleware from '../middleware/user_mid.js';
 import adminMiddleware from '../middleware/admin_mid.js';
 
 const router = express.Router();
 router.post('/create',adminMiddleware, createCourse);
-router.put('/update/:courseId',adminMiddleware, updateCourse);
-router.delete('/delete/:courseId',adminMiddleware, deleteCourse)
+router.put('/update/:id',adminMiddleware, updateCourse);
+router.delete('/delete/:id',adminMiddleware, deleteCourse)
 
-router.get('/courses', getallCourse)
-router.get('/course/:courseId', getCourse)
 
-router.post("/buy/:courseId", userMiddleware,buyCourse)
+router.get("/courses", getCourses);
+router.get('/course/:id', getOneCourse)
+
+router.post("/buy/:id", userMiddleware,buyCourse)
 
 
 export default router;

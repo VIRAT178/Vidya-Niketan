@@ -3,7 +3,7 @@ import logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { BACKEND_URL } from "../utilts/utilts";
+import  BACKEND_URL  from "../utilts/utilts";
 function AdminSignup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -19,7 +19,7 @@ function AdminSignup() {
 
     try {
       const response = await axios.post(
-        `${BACKEND_URL}/admin/signup`,
+        `${BACKEND_URL}admin/signup`,
         {
           firstName,
           lastName,

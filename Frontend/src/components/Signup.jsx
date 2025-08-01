@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../src/assets/logo.png";
 import { useState } from "react";
 import axios from "axios";
-import { BACKEND_URL } from "../utilts/utilts";
+import  BACKEND_URL  from "../utilts/utilts";
 import { toast } from "react-hot-toast";
 
 const Signup = () => {

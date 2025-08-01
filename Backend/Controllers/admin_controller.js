@@ -1,7 +1,8 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
-import config from "../config.js";
+import dotenv from "dotenv";
+dotenv.config();
 import { Admin } from "../Models/admin_model.js";
 
 export const signup = async (req, res) => {
@@ -52,20 +53,23 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const admin = await Admin.findOne({ email: email });
+    if (!admin) {
+      return res.status(403).json({ errors: "Invalid credentials" });
+    }
+
     const isPasswordCorrect = await bcrypt.compare(password, admin.password);
+    if (!isPasswordCorrect) {
+      return res.status(403).json({ errors: "Invalid credentials" });
+    }
 
     if (!admin || !isPasswordCorrect) {
       return res.status(403).json({ errors: "Invalid credentials" });
     }
 
     // jwt code
-    const token = jwt.sign(
-      {
-        id: admin._id,
-      },
-      config.JWT_ADMIN_PASSWORD,
-      { expiresIn: "1d" }
-    );
+    const token = jwt.sign({ id: admin._id }, process.env.JWT_ADMIN_PASSWORD, {
+      expiresIn: "1d",
+    });
     const cookieOptions = {
       expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 day
       httpOnly: true, //  can't be accsed via js directly
@@ -82,7 +86,6 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
   try {
-   
     res.clearCookie("jwt");
     res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {

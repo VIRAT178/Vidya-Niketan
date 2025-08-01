@@ -3,7 +3,7 @@ import logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { BACKEND_URL } from "../utilts/utilts";
+import  BACKEND_URL  from "../utilts/utilts";
 function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +17,7 @@ function AdminLogin() {
     console.log({ password });
     try {
       const response = await axios.post(
-        `${BACKEND_URL}/admin/login`,
+        `${BACKEND_URL}admin/login`,
         {
           email,
           password,
@@ -31,8 +31,8 @@ function AdminLogin() {
       );
       console.log("AdminLogin successful: ", response.data);
       toast.success(response.data.message);
-      navigate("/admin/dashboard");
       localStorage.setItem("admin", JSON.stringify(response.data));
+      navigate("/admin/dashboard");
     } catch (error) {
       if (error.response) {
         setErrorMessage(error.response.data.errors || "AdminLogin failed!!!");

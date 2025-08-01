@@ -2,7 +2,8 @@ import { User } from "../Models/users_model.js";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import jwt from "jsonwebtoken";
-import config from "../config.js";
+import dotenv from "dotenv";
+dotenv.config();
 import { Purchase } from "../Models/Purchase_model.js";
 import { Course } from "../Models/course_model.js";
 
@@ -54,18 +55,12 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email: email });
-    const isPassword = await bcrypt.compare(password, user.password);
+    const isPassword = bcrypt.compare(password, user.password);
 
     //jwt code
-    const token = jwt.sign(
-      {
-        id: user._id,
-      },
-      config.JWT_USER_PASSWORD,
-      {
-        expiresIn: "1d",
-      }
-    );
+    const token = jwt.sign({ id: user._id }, process.env.JWT_USER_PASSWORD, {
+      expiresIn: "1d",
+    });
 
     if (!user || !isPassword) {
       return res.status(403).json({ errors: "invalid credentials" });
@@ -90,20 +85,19 @@ export const logout = async (req, res) => {
   }
 };
 
-export const purchased = async(req,res)=>{
-  const userId = req.userId
+export const purchased = async (req, res) => {
+  const userId = req.userId;
   try {
-    const purchase = await Purchase.find({userId})
-    let purchasedCourseId = []
+    const purchase = await Purchase.find({ userId });
+    let purchasedCourseId = [];
     for (let i = 0; i < purchase.length; i++) {
-      purchasedCourseId.push(purchase[i].courseId)
+      purchasedCourseId.push(purchase[i].courseId);
     }
     const courseData = await Course.find({
-      _id:{$in:purchasedCourseId}
-    })
-    res.status(200).json({purchase,courseData})
+      _id: { $in: purchasedCourseId },
+    });
+    res.status(200).json({ purchase, courseData });
   } catch (error) {
-    console.log("Error in getting course",error)
+    console.log("Error in getting course", error);
   }
-}
-
+};

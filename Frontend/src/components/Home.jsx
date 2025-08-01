@@ -9,7 +9,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import toast from "react-hot-toast";
-import { BACKEND_URL } from "../utilts/utilts";
+import BACKEND_URL from '../utilts/utilts.js'
 
 function Home() {
   const [courses, setCourses] = useState([]);
@@ -30,13 +30,12 @@ function Home() {
     const fetchCourses = async () => {
       try {
         const response = await axios.get(
-          `${BACKEND_URL}/course/courses`,
+          `${BACKEND_URL}course/courses`,
           {
             withCredentials: true,
           }
-        );
-        console.log(response.data.courses);
-        console.log(response.data.courses[0].image.url)
+        )
+        console.log(response,response.data);
         setCourses(response.data.courses);
       } catch (error) {
         console.log("Error in fetching course", error);
@@ -50,7 +49,7 @@ function Home() {
 
   const handleLogout = async()=>{
     try {
-     const response = await axios.get(`${BACKEND_URL}/users/logout`,{
+     const response = await axios.get(`${BACKEND_URL}users/logout`,{
         withCredentials:true
       })
       toast.success("Logout Successfully",(response).data.message)
@@ -139,7 +138,6 @@ function Home() {
           </div>
         </header>
 
-        {/* main section */}
         <section className="text-center py-20">
           <h1 className="text-4xl font-semibold text-orange-500">
             Vidya Niketan
@@ -165,8 +163,8 @@ function Home() {
                     <div className="bg-gray-900 rounded-lg overflow-hidden">
                       <img className="h-32 w-full object-contain mt-3 rounded-lg" src={course.image?.url} alt="" />
                       <div className="p-6 text-center">
-                        <h2 className="text-xl font-bold text-white">{course.title}</h2>
-                        <button className="mt-8 bg-orange-500 text-white py-2 px-4 rounded-full hover:bg-blue-500 duration-300">Enroll Now</button>
+                        <h2 className="text-xl font-bold text-white mb-6">{course.title}</h2>
+                        <Link to="/courses" className="mt-8 bg-orange-500 text-white py-2 px-6 rounded-full hover:bg-blue-500 duration-300">Enroll Now</Link>
                       </div>
                     </div>
                   </div>

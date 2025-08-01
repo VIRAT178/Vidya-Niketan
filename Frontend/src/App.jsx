@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {  Navigate, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/login";
 import Signup from "./components/Signup";
@@ -18,17 +18,24 @@ import OurCourses from "./Admin/OurCourses";
 function App() {
   const user = JSON.parse(localStorage.getItem("user"));
   const admin = JSON.parse(localStorage.getItem("admin"));
+const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+
+useEffect(() => {
+  const adminData = localStorage.getItem("admin");
+  if (adminData) setIsAdminLoggedIn(true);
+}, []);
 
   return (
       <div>
         <Routes>
+          <Route path="*" element={<Navigate to="/" />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
           {/* Other Routes */}
           <Route path="/courses" element={<Courses />} />
-          <Route path="/buy/:courseId" element={<Buy />} />
+          <Route path="/buy/:id" element={<Buy />} />
           <Route
             path="/purchases"
             element={user ? <Purchases /> : <Navigate to={"/login"} />}

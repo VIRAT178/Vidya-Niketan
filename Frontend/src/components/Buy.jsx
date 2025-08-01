@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { BACKEND_URL } from "../utilts/utilts";
+import  BACKEND_URL  from "../utilts/utilts";
 function Buy() {
-  const { courseId } = useParams();
+  const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ function Buy() {
     const fetchBuyCourseData = async () => {
       try {
         const response = await axios.post(
-          `${BACKEND_URL}/course/buy/${courseId}`,
+          `${BACKEND_URL}course/buy/${id}`,
           {},
           {
             headers: {
@@ -55,7 +55,7 @@ function Buy() {
       }
     };
     fetchBuyCourseData();
-  }, [courseId]);
+  }, [id]);
 
   const handlePurchase = async (event) => {
     event.preventDefault();
@@ -110,14 +110,14 @@ function Buy() {
       const paymentInfo = {
         email: user?.user?.email,
         userId: user.user._id,
-        courseId: courseId,
+        courseId: id,
         paymentId: paymentIntent.id,
         amount: paymentIntent.amount,
         status: paymentIntent.status,
       };
       console.log("Payment info: ", paymentInfo);
       await axios
-        .post(`${BACKEND_URL}/order`, paymentInfo, {
+        .post(`${BACKEND_URL}order`, paymentInfo, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
