@@ -48,17 +48,21 @@ function Home() {
   
 
   const handleLogout = async()=>{
-    try {
-     const response = await axios.get(`${BACKEND_URL}users/logout`,{
-        withCredentials : true,
-      })
-      toast.success("Logout Successfully",(response).data.message)
-      setIsLoggedIn(false);
-      localStorage.removeItem("user");
-    } catch (error) {
-      console.log("Error in Logout", error)
-      toast.error("Error in Logout"|| error.response.data.errors)
-    }
+  try {
+  await axios.get(`${BACKEND_URL}users/logout`, { withCredentials : true });
+  toast.success("Logout Successful");
+  setIsLoggedIn(false);
+  localStorage.removeItem("user");
+} catch (error) {
+  if (error.response?.status === 401) {
+    toast.info("You were already logged out");
+    setIsLoggedIn(false);
+    localStorage.removeItem("user");
+  } else {
+    toast.error("Error in Logout" || error.response.data.errors);
+  }
+}
+
   }
   var settings = {
     dots: true,
